@@ -31,6 +31,9 @@ const editInitial = computed<DrinkRecordInput | undefined>(() => {
     notes: r.notes,
     lastDrankAt: r.lastDrankAt,
     photoUrl: r.photoUrl,
+    price: r.price,
+    menuItemId: r.menuItemId,
+    brandId: r.brandId,
   }
 })
 
