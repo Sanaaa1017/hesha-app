@@ -20,6 +20,21 @@ const router = createRouter({
       component: () => import('@/views/BrandMenuView.vue'),
     },
     {
+      path: '/records',
+      name: 'records',
+      component: () => import('@/views/DrinkRecordListView.vue'),
+    },
+    {
+      path: '/records/new',
+      name: 'record-create',
+      component: () => import('@/views/DrinkRecordCreateView.vue'),
+    },
+    {
+      path: '/records/:id',
+      name: 'record-detail',
+      component: () => import('@/views/DrinkRecordDetailView.vue'),
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'not-found',
       component: () => import('@/views/NotFoundView.vue'),
