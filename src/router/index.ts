@@ -20,6 +20,11 @@ const router = createRouter({
       component: () => import('@/views/BrandMenuView.vue'),
     },
     {
+      path: '/nearby',
+      name: 'nearby',
+      component: () => import('@/views/NearbyView.vue'),
+    },
+    {
       path: '/records',
       name: 'records',
       component: () => import('@/views/DrinkRecordListView.vue'),
