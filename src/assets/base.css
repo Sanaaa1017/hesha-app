@@ -1,53 +1,54 @@
-/* color palette from <https://github.com/vuejs/theme> */
+/* 喝啥 Hesha — 設計系統（可愛簡約風格） */
+
 :root {
-  --vt-c-white: #ffffff;
-  --vt-c-white-soft: #f8f8f8;
-  --vt-c-white-mute: #f2f2f2;
+  /* 主色：奶茶焦糖 */
+  --color-primary: #e89b6c;
+  --color-primary-strong: #d17f4e;
+  --color-primary-soft: #fbe7d6;
 
-  --vt-c-black: #181818;
-  --vt-c-black-soft: #222222;
-  --vt-c-black-mute: #282828;
+  /* 點綴色 */
+  --color-pink: #ffb5c2;
+  --color-pink-soft: #ffe4ea;
+  --color-mint: #8fd0c4;
+  --color-mint-soft: #dff3ef;
+  --color-lemon: #ffd97d;
 
-  --vt-c-indigo: #2c3e50;
+  /* 中性色 */
+  --color-bg: #fff8f0;
+  --color-surface: #ffffff;
+  --color-surface-alt: #fdf2e9;
+  --color-border: #f0e2d4;
+  --color-text: #5c4a3d;
+  --color-text-soft: #9b8b7e;
+  --color-text-inverse: #ffffff;
 
-  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
-  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
-  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
-  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
+  /* 狀態色 */
+  --color-success: #6cc28f;
+  --color-danger: #ef7a85;
+  --color-star: #ffc24b;
 
-  --vt-c-text-light-1: var(--vt-c-indigo);
-  --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
-  --vt-c-text-dark-1: var(--vt-c-white);
-  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
-}
+  /* 圓角 */
+  --radius-sm: 10px;
+  --radius: 16px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
 
-/* semantic color variables for this project */
-:root {
-  --color-background: var(--vt-c-white);
-  --color-background-soft: var(--vt-c-white-soft);
-  --color-background-mute: var(--vt-c-white-mute);
+  /* 陰影 */
+  --shadow-sm: 0 2px 8px rgba(92, 74, 61, 0.06);
+  --shadow: 0 6px 20px rgba(92, 74, 61, 0.1);
+  --shadow-lg: 0 12px 32px rgba(92, 74, 61, 0.14);
 
-  --color-border: var(--vt-c-divider-light-2);
-  --color-border-hover: var(--vt-c-divider-light-1);
+  /* 間距 */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
 
-  --color-heading: var(--vt-c-text-light-1);
-  --color-text: var(--vt-c-text-light-1);
-
-  --section-gap: 160px;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: var(--vt-c-black);
-    --color-background-soft: var(--vt-c-black-soft);
-    --color-background-mute: var(--vt-c-black-mute);
-
-    --color-border: var(--vt-c-divider-dark-2);
-    --color-border-hover: var(--vt-c-divider-dark-1);
-
-    --color-heading: var(--vt-c-text-dark-1);
-    --color-text: var(--vt-c-text-dark-2);
-  }
+  /* 字體 */
+  --font-family:
+    'PingFang TC', 'Noto Sans TC', 'Microsoft JhengHei', -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 *,
@@ -58,29 +59,38 @@
   font-weight: normal;
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   min-height: 100vh;
   color: var(--color-text);
-  background: var(--color-background);
-  transition:
-    color 0.5s,
-    background-color 0.5s;
-  line-height: 1.6;
-  font-family:
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    'Fira Sans',
-    'Droid Sans',
-    'Helvetica Neue',
-    sans-serif;
+  background: var(--color-bg);
+  font-family: var(--font-family);
   font-size: 15px;
-  text-rendering: optimizeLegibility;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
 }
