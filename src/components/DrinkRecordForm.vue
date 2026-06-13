@@ -26,7 +26,12 @@ const form = reactive({
   notes: props.initial?.notes ?? '',
   lastDrankAt: props.initial?.lastDrankAt ?? todayISODate(),
   photoUrl: props.initial?.photoUrl ?? null,
+  price: props.initial?.price != null ? String(props.initial.price) : '',
 })
+
+// 菜單關聯欄位（功能⑥）僅透傳，編輯時不遺失
+const menuItemId = props.initial?.menuItemId ?? null
+const brandId = props.initial?.brandId ?? null
 
 const errors = reactive({ drinkName: '', storeName: '' })
 const isProcessingPhoto = ref(false)
@@ -52,6 +57,13 @@ function removePhoto(): void {
   form.photoUrl = null
 }
 
+function parsePrice(): number | null {
+  const raw = form.price.trim()
+  if (raw === '') return null
+  const value = Number(raw)
+  return Number.isFinite(value) && value >= 0 ? Math.round(value) : null
+}
+
 function onSubmit(): void {
   if (!validate()) return
   emit('submit', {
@@ -61,6 +73,9 @@ function onSubmit(): void {
     notes: form.notes.trim() || null,
     lastDrankAt: form.lastDrankAt,
     photoUrl: form.photoUrl,
+    price: parsePrice(),
+    menuItemId,
+    brandId,
   })
 }
 </script>
@@ -106,10 +121,26 @@ function onSubmit(): void {
       />
     </label>
 
-    <label class="field">
-      <span class="label">最後一次喝</span>
-      <input v-model="form.lastDrankAt" type="date" class="input" />
-    </label>
+    <div class="field-row">
+      <label class="field">
+        <span class="label">最後一次喝</span>
+        <input v-model="form.lastDrankAt" type="date" class="input" />
+      </label>
+      <label class="field">
+        <span class="label">金額</span>
+        <div class="price-input">
+          <span class="price-prefix">$</span>
+          <input
+            v-model="form.price"
+            type="number"
+            min="0"
+            inputmode="numeric"
+            class="input"
+            placeholder="選填"
+          />
+        </div>
+      </label>
+    </div>
 
     <div class="field">
       <span class="label">照片</span>
@@ -142,6 +173,32 @@ function onSubmit(): void {
   display: flex;
   flex-direction: column;
   gap: 6px;
+}
+
+.field-row {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.field-row .field {
+  flex: 1;
+}
+
+.price-input {
+  position: relative;
+}
+
+.price-prefix {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-soft);
+  font-weight: 600;
+}
+
+.price-input .input {
+  padding-left: 28px;
 }
 
 .label {
