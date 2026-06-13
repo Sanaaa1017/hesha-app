@@ -2,23 +2,31 @@
 import { computed, onMounted, ref } from 'vue'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
 import { useDrinkRecordsStore } from '@/stores/drinkRecords'
+import { useMenuStore } from '@/stores/menu'
 import type { DrinkRecordInput } from '@/types/drinkRecord'
 import { formatDate } from '@/utils/date'
 import StarRating from '@/components/StarRating.vue'
 import DrinkRecordForm from '@/components/DrinkRecordForm.vue'
+import NutritionBadges from '@/components/NutritionBadges.vue'
 import BaseButton from '@/components/BaseButton.vue'
 
 const route = useRoute()
 const router = useRouter()
 const store = useDrinkRecordsStore()
+const menu = useMenuStore()
 
 const id = computed(() => String(route.params.id))
 const record = computed(() => store.getRecord(id.value))
 const isEditing = ref(false)
 const showDeleteConfirm = ref(false)
 
+const linkedItem = computed(() =>
+  record.value?.menuItemId ? menu.getItem(record.value.menuItemId) : undefined,
+)
+
 onMounted(() => {
   if (!store.records.length) store.fetchRecords()
+  menu.load()
 })
 
 const editInitial = computed<DrinkRecordInput | undefined>(() => {
@@ -85,6 +93,16 @@ function onDelete(): void {
         />
 
         <div v-if="record.notes" class="notes card">{{ record.notes }}</div>
+
+        <div v-if="linkedItem" class="nutrition-card card">
+          <p class="nutrition-title">營養資訊（{{ linkedItem.name }}）</p>
+          <NutritionBadges
+            :sugar-g="linkedItem.sugarG"
+            :calories="linkedItem.calories"
+            :caffeine-mg="linkedItem.caffeineMg"
+            size="md"
+          />
+        </div>
 
         <p class="date">最後一次喝：{{ formatDate(record.lastDrankAt) }}</p>
 
@@ -161,6 +179,19 @@ function onDelete(): void {
   margin-top: var(--space-md);
   white-space: pre-wrap;
   line-height: 1.7;
+}
+
+.nutrition-card {
+  margin-top: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.nutrition-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-soft);
 }
 
 .date {

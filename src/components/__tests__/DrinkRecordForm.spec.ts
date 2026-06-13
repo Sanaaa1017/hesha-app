@@ -1,8 +1,13 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, beforeEach } from 'vitest'
 import { mount } from '@vue/test-utils'
+import { setActivePinia, createPinia } from 'pinia'
 import DrinkRecordForm from '../DrinkRecordForm.vue'
 
 describe('DrinkRecordForm', () => {
+  beforeEach(() => {
+    setActivePinia(createPinia())
+  })
+
   it('必填欄位為空時不 emit submit 並顯示錯誤', async () => {
     const wrapper = mount(DrinkRecordForm)
     await wrapper.find('form').trigger('submit')
