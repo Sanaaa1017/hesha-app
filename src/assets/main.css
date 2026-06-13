@@ -1,35 +1,43 @@
 @import './base.css';
 
 #app {
-  max-width: 1280px;
+  min-height: 100vh;
+}
+
+/* 共用工具 class */
+.page {
+  max-width: 720px;
   margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
+  padding: var(--space-lg) var(--space-md) 96px;
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
+.page-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: var(--space-xs);
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+.page-subtitle {
+  color: var(--color-text-soft);
+  font-size: 14px;
+  margin-bottom: var(--space-lg);
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-md);
+}
 
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
+.empty-state {
+  text-align: center;
+  color: var(--color-text-soft);
+  padding: var(--space-xl) var(--space-md);
+}
+
+.empty-state .emoji {
+  font-size: 48px;
+  display: block;
+  margin-bottom: var(--space-sm);
 }
